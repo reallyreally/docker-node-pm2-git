@@ -34,7 +34,8 @@ fi
 
 if [ -d "/usr/src/app" ]; then
   cd /usr/src/app
-  pm2-docker $@
+  pm2-docker $@ && \
+    pm2 unmonitor pm2-auto-pull
 else
   echo "There is no NodeJS application installed"
   "$@"
