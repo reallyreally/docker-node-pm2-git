@@ -30,7 +30,7 @@ RUN apk update && \
     npm install -g npm@${NPM_VERSION} && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf && \
     if [ -n "$YARN_VERSION" ]; then \
-      gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
+      gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys \
         6A010C5166006599AA17F08146C2130DFD2497F5 && \
       curl -sSL -O https://yarnpkg.com/${YARN_VERSION}.tar.gz -O https://yarnpkg.com/${YARN_VERSION}.tar.gz.asc && \
       gpg --batch --verify ${YARN_VERSION}.tar.gz.asc ${YARN_VERSION}.tar.gz && \
