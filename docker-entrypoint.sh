@@ -15,13 +15,19 @@ if [ ! -d "/usr/src/app" ]; then
     echo "${REPO_KEY}" > /root/.ssh/repo-key
   fi
 
+  if [ ! -z "$GIT_BRANCH" ]; then
+    GITBRANCHCMD="-b ${GIT_BRANCH}"
+  else
+    GITBRANCHCMD=""
+  fi
+
   if [ ! -s "/root/.ssh/repo-key" ]; then
     echo "No private key provided - removing configuration"
     rm -f /root/.ssh/repo-key /root/.ssh/config
   fi
 
   echo "Cloning ${REPO}"
-  git clone $REPO /usr/src/app
+  git clone $GITBRANCHCMD $REPO /usr/src/app
   if [ -f "/usr/src/app/package.json" ]; then
     cd /usr/src/app
     npm install
