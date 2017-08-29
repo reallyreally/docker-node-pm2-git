@@ -2,6 +2,7 @@
 
 if [ -z "$NODE_ENV" ]; then
   NODE_ENV=production
+  export NODE_ENV
 fi
 
 if [ ! -d "/usr/src/app" ]; then
