@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Troy Kelly <troy.kelly@really.ai>
 
-ENV VERSION=v8.4.0 NPM_VERSION=5 YARN_VERSION=latest
+ENV VERSION=v6.11.2 NPM_VERSION=3 YARN_VERSION=latest
 
 # For base builds
 #ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
