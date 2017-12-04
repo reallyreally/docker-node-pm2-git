@@ -1,6 +1,9 @@
 # really/node-pm2-git
 Docker container to fetch code from public/private repos with key where needed
 
+[![GitHub issues](https://img.shields.io/github/issues/reallyreally/docker-node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/issues) [![GitHub license](https://img.shields.io/github/license/reallyreally/docker-node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/blob/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/really/node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/)
+
 Launch a git hosted node project with something like:
 ```
 docker run -d -p 8080:8080 \
