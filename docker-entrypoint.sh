@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+set -x
 
 if [ -z "$NODE_ENV" ]; then
   NODE_ENV=production
