@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -x
 
 if [ -z "$NODE_ENV" ]; then
@@ -31,7 +31,7 @@ if [ ! -d "/usr/src/app" ]; then
   echo "Cloning ${REPO}"
   git clone $GITBRANCHCMD $REPO /usr/src/app
   if [ -f "/usr/src/app/package.json" ]; then
-    cd /usr/src/app
+    cd /usr/src/app || exit
     npm install
     ls -al
   else
@@ -41,9 +41,9 @@ if [ ! -d "/usr/src/app" ]; then
 fi
 
 if [ -d "/usr/src/app" ]; then
-  cd /usr/src/app
+  cd /usr/src/app || exit
   pm2-docker $@
 else
   echo "There is no NodeJS application installed"
-  "$@"
+  $@
 fi
