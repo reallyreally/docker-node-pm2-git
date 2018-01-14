@@ -33,8 +33,8 @@ if [ ! -d "/usr/src/app" ]; then
     cd /usr/src/app || exit
     mkdir -pv /usr/src/app/.git/hooks
     printf "#!/usr/bin/env sh\nif [ -f \"/usr/src/app/package.json\" ]; then\n  cd /usr/src/app || exit\n  rm -Rf ./node_modules\n  npm install\nfi" > /usr/src/app/.git/hooks/post-merge
-    chmod 555 /usr/src/app/.git/hooks/post-update
-    /usr/src/app/.git/hooks/post-update
+    chmod 555 /usr/src/app/.git/hooks/post-merge
+    /usr/src/app/.git/hooks/post-merge
     ls -al
   else
     echo "Failed to fetch repository"
