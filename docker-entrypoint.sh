@@ -13,7 +13,7 @@ if [ ! -d "/usr/src/app" ]; then
 
   if [ ! -z "$REPO_KEY" ]; then
     echo "Storing private key as /root/.ssh/repo-key"
-    echo "${REPO_KEY}" > /root/.ssh/repo-key
+    printf "${REPO_KEY}" > /root/.ssh/repo-key
   fi
 
   if [ ! -z "$GIT_BRANCH" ]; then
