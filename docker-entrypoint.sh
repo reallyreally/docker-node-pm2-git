@@ -29,9 +29,12 @@ if [ ! -d "/usr/src/app" ]; then
 
   echo "Cloning ${REPO}"
   git clone $GITBRANCHCMD $REPO /usr/src/app
-  if [ -f "/usr/src/app/package.json" ]; then
-    cd /usr/src/app
-    npm install
+  if [ -d "/usr/src/app/.git" ]; then
+    cd /usr/src/app || exit
+    mkdir -pv /usr/src/app/.git/hooks
+    printf "#!/usr/bin/env sh\nif [ -f \"/usr/src/app/package.json\" ]; then\n  cd /usr/src/app || exit\n  rm -Rf ./node_modules\n  npm install\nfi" > /usr/src/app/.git/hooks/post-update
+    chmod 555 /usr/src/app/.git/hooks/post-update
+    /usr/src/app/.git/hooks/post-update
     ls -al
   else
     echo "Failed to fetch repository"
@@ -40,9 +43,9 @@ if [ ! -d "/usr/src/app" ]; then
 fi
 
 if [ -d "/usr/src/app" ]; then
-  cd /usr/src/app
+  cd /usr/src/app || exit
   pm2-docker $@
 else
   echo "There is no NodeJS application installed"
-  "$@"
+  $@
 fi
