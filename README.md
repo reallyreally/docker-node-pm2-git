@@ -8,6 +8,7 @@ Launch a git hosted node project with something like:
 ```
 docker run -d -p 8080:8080 \
   --env NPM_TOKEN=aaaaaaaa-bbbb-0000-0a0a-ffffeeee8888 \
+  --env PACKAGES="make gcc g++ python" \  
   --env REPO_KEY="$(cat ~/.ssh/my-repo-key)" \
   --env REPO="git@github.com:reallyreally/node-expressjs-service.git" \
   --env GIT_BRANCH="production-live" \
@@ -21,6 +22,7 @@ Environment variables
 ---------------------
 
 `NPM_TOKEN` allows to use private [npmjs.com](https://www.npmjs.com) packages (optional)
+`PACKAGES` allows installation of packages that might be needed for your app (optional)
 `REPO_KEY` read in a file to be used as the key for your repository clone (optional)
 `REPO` the repository to clone (required)
 `GIT_BRANCH` the branch to clone (optional)
