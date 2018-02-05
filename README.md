@@ -1,5 +1,8 @@
 # really/node-pm2-git
+_DANGER_ This is a testing image and will reveal keys
 Docker container to fetch code from public/private repos with key where needed
+
+[![](https://images.microbadger.com/badges/image/really/node-pm2-git.svg)](https://microbadger.com/images/really/node-pm2-git "Get your own image badge on microbadger.com") [![GitHub issues](https://img.shields.io/github/issues/reallyreally/docker-node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/issues) [![GitHub license](https://img.shields.io/github/license/reallyreally/docker-node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/blob/master/LICENSE) [![Docker Pulls](https://img.shields.io/docker/pulls/really/node-pm2-git.svg?style=flat-square)](https://github.com/reallyreally/docker-node-pm2-git/)
 
 Launch a git hosted node project with something like:
 ```
