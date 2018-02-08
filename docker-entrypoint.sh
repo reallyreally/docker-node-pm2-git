@@ -47,7 +47,7 @@ if [ ! -d "/usr/src/app" ]; then
 
 fi
 
-if [ -d "/usr/src/app" ]; then
+if [ -d "/usr/src/app" ] && [ -f "/usr/src/app/$1" ]; then
   cd /usr/src/app || exit
   pm2-docker $@
 else
