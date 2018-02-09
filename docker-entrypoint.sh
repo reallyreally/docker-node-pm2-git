@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -x
 
 if [ -z "$NODE_ENV" ]; then
   NODE_ENV=production
@@ -6,6 +7,10 @@ if [ -z "$NODE_ENV" ]; then
 fi
 
 if [ ! -d "/usr/src/app" ]; then
+
+  if [ ! -z "$PACKAGES" ]; then
+    apk add --no-cache $PACKAGES
+  fi
 
   if [ ! -z "$NPM_TOKEN" ]; then
     echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /root/.npmrc
