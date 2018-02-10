@@ -66,7 +66,8 @@ RUN apk update && \
   chmod 600 /root/.ssh/config && \
   chmod 600 /root/.ssh/repo-key && \
   npm install pm2 -g && \
-  pm2 install pm2-auto-pull
+  pm2 install pm2-auto-pull && \
+  pm2 set pm2-auto-pull:interval 60000
 
 COPY known_hosts /root/.ssh/known_hosts
 COPY docker-entrypoint.sh /usr/local/bin/
