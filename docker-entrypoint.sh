@@ -7,6 +7,10 @@ fi
 
 if [ ! -d "/usr/src/app" ]; then
 
+  if [ ! -z "$PACKAGES" ]; then
+    apk add --no-cache $PACKAGES
+  fi
+
   if [ ! -z "$NPM_TOKEN" ]; then
     echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /root/.npmrc
   fi
@@ -32,7 +36,7 @@ if [ ! -d "/usr/src/app" ]; then
   if [ -d "/usr/src/app/.git" ]; then
     cd /usr/src/app || exit
     mkdir -pv /usr/src/app/.git/hooks
-    printf "#!/usr/bin/env sh\nif [ -f \"/usr/src/app/package.json\" ]; then\n  cd /usr/src/app || exit\n  rm -Rf ./node_modules\n  npm install\nfi" > /usr/src/app/.git/hooks/post-merge
+    printf "#!/usr/bin/env sh\nif [ -f \"/usr/src/app/yarn.lock\" ]; then\n  cd /usr/src/app || exit\n  rm -Rf ./node_modules\n  yarn install\nelif [ -f \"/usr/src/app/package.json\" ]; then\n  cd /usr/src/app || exit\n  rm -Rf ./node_modules\n  npm install\nfi" > /usr/src/app/.git/hooks/post-merge
     chmod 555 /usr/src/app/.git/hooks/post-merge
     /usr/src/app/.git/hooks/post-merge
     ls -al
@@ -42,7 +46,7 @@ if [ ! -d "/usr/src/app" ]; then
 
 fi
 
-if [ -d "/usr/src/app" ]; then
+if [ -d "/usr/src/app" ] && [ -f "/usr/src/app/$1" ]; then
   cd /usr/src/app || exit
   pm2-docker $@
 else
