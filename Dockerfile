@@ -4,6 +4,20 @@ MAINTAINER Troy Kelly <troy.kelly@really.ai>
 
 ENV VERSION=v6.11.2 NPM_VERSION=3 YARN_VERSION=latest
 
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="Node.JS with PM2 and git" \
+      org.label-schema.description="Provides node with working pm2 and git. Supports starting apps from pm2.json with feedback to keymetrics." \
+      org.label-schema.url="https://really.ai/about/opensource" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/reallyreally/docker-node-pm2-git" \
+      org.label-schema.vendor="Really Really, Inc." \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
+
 # For base builds
 #ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
@@ -52,7 +66,8 @@ RUN apk update && \
   chmod 600 /root/.ssh/config && \
   chmod 600 /root/.ssh/repo-key && \
   npm install pm2 -g && \
-  pm2 install pm2-auto-pull
+  pm2 install pm2-auto-pull && \
+  pm2 set pm2-auto-pull:interval 60000
 
 COPY known_hosts /root/.ssh/known_hosts
 COPY docker-entrypoint.sh /usr/local/bin/
