@@ -6,7 +6,7 @@ if [ -z "$NODE_ENV" ]; then
   export NODE_ENV
 fi
 
-if [ ! -d "/usr/src/app" ]; then
+if [ ! -d "/usr/src/app/.git" ]; then
 
   if [ ! -z "$PACKAGES" ]; then
     apk add --no-cache $PACKAGES
