@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Troy Kelly <troy.kelly@really.ai>
 
-ENV VERSION=v9.5.0 NPM_VERSION=5 YARN_VERSION=latest
+ENV VERSION=latest-argon NPM_VERSION=2.15.11 YARN_VERSION=latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
