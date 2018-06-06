@@ -2,7 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Troy Kelly <troy.kelly@really.ai>
 
-ENV VERSION=latest NPM_VERSION=latest YARN_VERSION=latest
+ENV VERSION=v10.4.0 NPM_VERSION=6.1.0 YARN_VERSION=latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
