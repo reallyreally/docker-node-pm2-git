@@ -47,6 +47,11 @@ if [ ! -d "/usr/src/app/.git" ]; then
 
 fi
 
+if [ ! -z "$PRE_RUN" ]; then
+  echo "$PRE_RUN"
+  $PRE_RUN
+fi
+
 if [ -d "/usr/src/app" ] && [ -f "/usr/src/app/$1" ]; then
   cd /usr/src/app || exit
   pm2-docker $@
