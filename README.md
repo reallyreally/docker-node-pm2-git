@@ -12,6 +12,7 @@ docker run -d -p 8080:8080 \
   --env REPO="git@github.com:reallyreally/node-expressjs-service.git" \
   --env GIT_BRANCH="production-live" \
   --env KEYMETRICS_PUBLIC=0000aaaa1111ffff \
+  --env PRE_RUN="npm run build" \
   --env KEYMETRICS_SECRET=0123456789abcdef \
   --env PORT=8080 \
   really/node-pm2-git ./pm2.json
@@ -39,7 +40,7 @@ In the example we call `./pm2.json` which could contain the below.
     "script": "./bin/www",
     "instances" : 0,
     "exec_mode" : "cluster",
-    "post_update": ["npm install", "echo Launching..."],
+    "post_update": ["npm install", "npm run build", "echo Launching..."],
     "env": {
       "production": true
     }
