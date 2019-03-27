@@ -24,6 +24,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN apk update && \
   apk add --no-cache openssh-client git curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
   for key in \
+    4ED778F539E3634C779C87C6D7062848A1AB005C \
+    B9E2F5981AA6E0CD28160D9FF13993A75599653C \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     B9AE9905FFD7803F25714661B63B535A4C206CA9 \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
@@ -31,11 +33,12 @@ RUN apk update && \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
     8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
     C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
-    DD8F2338BAE7501E3DD5AC78C273792F7D83545D; \
+    DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
+    A48C2BEE680E841632CD4E44F07496B3EB3C1762; \
   do \
-    gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
+    gpg --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
+    gpg --keyserver pgp.mit.edu --recv-keys "$key" ; \
   done && \
   curl -SLO "https://nodejs.org/dist/$VERSION/node-$VERSION.tar.xz" && \
   curl -SLO --compressed "https://nodejs.org/dist/$VERSION/SHASUMS256.txt.asc" && \
