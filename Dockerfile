@@ -1,8 +1,8 @@
 FROM alpine:latest
 
-MAINTAINER Troy Kelly <troy.kelly@really.ai>
+MAINTAINER Troy Kelly <troy@aperim.com>
 
-ENV VERSION=v11.12.0 NPM_VERSION=6.7.0 YARN_VERSION=1.15.2
+ENV VERSION=v11.12.0 NPM_VERSION=6.7.0 YARN_VERSION=latest
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -48,15 +48,15 @@ RUN apk update && \
   cd node-${VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
   make -j$(getconf _NPROCESSORS_ONLN) && \
-  make install && \
-  cd / && \
+  make install
+RUN cd / && \
   if [ -z "$CONFIG_FLAGS" ]; then \
     npm install -g npm@${NPM_VERSION} && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf && \
     if [ -n "$YARN_VERSION" ]; then \
-      gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys \
+      gpg --keyserver pool.sks-keyservers.net --recv-keys \
         6A010C5166006599AA17F08146C2130DFD2497F5 && \
-      curl -sSL -O https://yarnpkg.com/${YARN_VERSION}.tar.gz -O https://yarnpkg.com/${YARN_VERSION}.tar.gz.asc && \
+      curl -sSL -O https://yarnpkg.com/${YARN_VERSION}.tar.gz -O https://yarnpkg.com/latest.tar.gz.asc https://yarnpkg.com/${YARN_VERSION}.tar.gz.asc && \
       gpg --batch --verify ${YARN_VERSION}.tar.gz.asc ${YARN_VERSION}.tar.gz && \
       mkdir /usr/local/share/yarn && \
       tar -xf ${YARN_VERSION}.tar.gz -C /usr/local/share/yarn --strip 1 && \
